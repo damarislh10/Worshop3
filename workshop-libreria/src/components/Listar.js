@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { deleteLibroAsync } from "../redux/actions/actionLibros";
 
 const Listar = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const Listar = () => {
           {libros.map((l, i) => (
             <tr key={i}>
               <td>
-                <img src="" width="50" height="50" alt="" />
+                <img src={l.imagen} width="50" height="50" alt="" />
               </td>
               <td>{l.nombre}</td>
               <td>{l.autor}</td>
@@ -38,6 +39,7 @@ const Listar = () => {
                   value="Eliminar"
                   type="button"
                   className="btn btn-outline-dark"
+                  onClick={() => dispatch(deleteLibroAsync(l.id))}
                 />
               </td>
             </tr>

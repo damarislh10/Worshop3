@@ -52,17 +52,22 @@ const Agregar = () => {
             <h3 className="text-center"> Libros </h3>
 
             <form className="form-group" onSubmit={formik.handleSubmit}>
-                   <input
+              <input
                 id="fileSelector"
                 type="file"
                 className="form-control "
-                placeholder="url"
+                placeholder="imagen"
                 name="url imagen"
                 style={{ display: "none" }}
+                onChange={handleFileChanged}
                 required
               />
 
-              <button className="btn btn-dark" type="button">
+              <button
+                className="btn btn-dark"
+                type="button"
+                onClick={handlePictureClick}
+              >
                 Imagen
               </button>
 

@@ -1,7 +1,29 @@
 import { typesLibros } from "../types/types";
 import { db } from "../../firebase/firebaseConfig";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+} from "firebase/firestore";
 
+// Eliminar asyncronico
+
+export const deleteLibroAsync = (id) => {
+  return async (dispatch) => {
+    deleteDoc(doc(db, "libros", id));
+    dispatch(deleteSincronico(id));
+    dispatch(listLibrosAsync());
+  };
+};
+
+export const deleteSincronico = (id) => {
+  return {
+    type: typesLibros.delete,
+    payload: id,
+  };
+};
 // Listar asyncronico -------------
 
 export const listLibrosAsync = () => {
