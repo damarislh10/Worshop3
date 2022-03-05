@@ -1,6 +1,9 @@
 import { getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { Navigate, useNavigate } from "react-router-dom";
 import { google } from "../../firebase/firebaseConfig";
 import { types } from "../types/types";
+
+
 
 export const loginEmailPassword = (email, password) => {
     return(dispatch) => {
@@ -16,7 +19,9 @@ export const loginEmailPassword = (email, password) => {
     }
 }
 
+
 export const loginGoogle = () => {
+    
     return (dispatch) => {
         const auth = getAuth();
         signInWithPopup(auth, google)
@@ -24,6 +29,7 @@ export const loginGoogle = () => {
             dispatch(actionLogin(user.uid, user.displayName))
             console.log(user)
             console.log('Bienvenida')
+            Navigate
         })
         .catch(e => {
             console.log(e)

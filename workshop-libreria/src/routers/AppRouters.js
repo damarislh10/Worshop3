@@ -7,7 +7,7 @@ function AppRouters() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/*" element={<Login />} />
         <Route path="/registro" element={<Registro/>}/>
         <Route path="/agregar" element={<Agregar />} />
       </Routes>

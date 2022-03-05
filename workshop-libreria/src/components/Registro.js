@@ -23,7 +23,8 @@ const Registro = () => {
   }
   return (
     <div>
-       <Form className="container" onSubmit={handleSubmitRegistro}>
+      <h2 className="y-5 m-5">Registro</h2>
+       <Form className="container w-50  y-5 m-5" onSubmit={handleSubmitRegistro} >
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>Nombre</Form.Label>
               <Form.Control
@@ -69,10 +70,13 @@ const Registro = () => {
                         onChange={handleInputChange}
                     />
                 </Form.Group>
+                <br></br>
                 <Button
-                    variant="primary" type="submit">
+                    variant="dark" type="submit" className="w-50">
                     Registrarse
                 </Button>
+                <br></br>
+                <br></br>
                 <Link to="/login">Login</Link>
 
             </Form>       
