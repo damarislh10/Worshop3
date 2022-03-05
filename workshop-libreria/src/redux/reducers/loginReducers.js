@@ -1,10 +1,11 @@
 import { types } from '../types/types'
 
-const loginReducers = (state={}, action) => {
+export const loginReducers = (state={}, action) => {
     switch(action.type) {
         case types.login:
             return{
-                ...state
+                id: action.payload.id,
+                name: action.payload.displayname
             }
         case types.logout:
             return{}
@@ -14,4 +15,4 @@ const loginReducers = (state={}, action) => {
     }
 }
 
-export default loginReducers
+
