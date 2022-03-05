@@ -1,4 +1,3 @@
-import React from "react";
 
 export const FileUpload = async (file) => {
   const urlCloudinary = "https://api.cloudinary.com/v1_1/df90q7vvj/upload";
