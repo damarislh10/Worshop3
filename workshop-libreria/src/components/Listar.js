@@ -1,6 +1,12 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Listar = () => {
+  const dispatch = useDispatch();
+
+  const { libros } = useSelector((store) => store.libros);
+
+  console.log(libros);
   return (
     <div>
       <table className="table text-center mt-3">
@@ -14,14 +20,14 @@ const Listar = () => {
           </tr>
         </thead>
         <tbody>
-          {
-            <tr>
+          {libros.map((l, i) => (
+            <tr key={i}>
               <td>
                 <img src="" width="50" height="50" alt="" />
               </td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{l.nombre}</td>
+              <td>{l.autor}</td>
+              <td>{l.genero}</td>
               <td>
                 <input
                   value="Actualizar"
@@ -35,7 +41,7 @@ const Listar = () => {
                 />
               </td>
             </tr>
-          }
+          ))}
         </tbody>
       </table>
     </div>
