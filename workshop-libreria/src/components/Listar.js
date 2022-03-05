@@ -14,6 +14,7 @@ const Listar = () => {
     const traerElLibro = libros.find((t) => t.id === id);
     console.log(traerElLibro)
     setModal(true);
+    
     setEnviarDatosModal(traerElLibro);
   };
 
