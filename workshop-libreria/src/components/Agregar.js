@@ -1,6 +1,11 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { FileUpload } from "../helpers/FileUpload";
+import {
+  agregarLibroAsync,
+  listLibrosAsync,
+} from "../redux/actions/actionLibros";
 import Listar from "./Listar";
 
 const Agregar = () => {
@@ -8,12 +13,35 @@ const Agregar = () => {
 
   const formik = useFormik({
     initialValues: {
-      url: "",
+      imagen: "",
       nombre: "",
       autor: "",
       genero: "",
     },
+    onSubmit: (data) => {
+      dispatch(agregarLibroAsync(data));
+    },
   });
+
+  const handlePictureClick = () => {
+    document.querySelector("#fileSelector").click();
+  };
+
+  const handleFileChanged = (e) => {
+    const file = e.target.files[0];
+    FileUpload(file)
+      .then((response) => {
+        formik.initialValues.imagen = response;
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  useEffect(() => {
+    dispatch(listLibrosAsync());
+  }, [dispatch]);
 
   return (
     <div>
@@ -28,13 +56,18 @@ const Agregar = () => {
                 id="fileSelector"
                 type="file"
                 className="form-control "
-                placeholder="url"
+                placeholder="imagen"
                 name="url imagen"
                 style={{ display: "none" }}
+                onChange={handleFileChanged}
                 required
               />
 
-              <button className="btn btn-dark" type="button">
+              <button
+                className="btn btn-dark"
+                type="button"
+                onClick={handlePictureClick}
+              >
                 Imagen
               </button>
 
@@ -44,6 +77,7 @@ const Agregar = () => {
                 name="nombre"
                 autoComplete="off"
                 placeholder="Nombre del libro"
+                onChange={formik.handleChange}
                 required
               />
 
@@ -53,6 +87,7 @@ const Agregar = () => {
                 name="autor"
                 autoComplete="off"
                 placeholder="autor"
+                onChange={formik.handleChange}
                 required
               />
 
@@ -61,6 +96,7 @@ const Agregar = () => {
                 autoComplete="off"
                 name="genero"
                 placeholder="genero"
+                onChange={formik.handleChange}
                 required
               ></textarea>
 
