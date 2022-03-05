@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteLibroAsync } from "../redux/actions/actionLibros";
+import Editar from "./Editar";
 
 const Listar = () => {
   const dispatch = useDispatch();
 
-  const { libros } = useSelector((store) => store.libros);
+  const [modal, setModal] = useState(false);
+  const [enviarDatosModal, setEnviarDatosModal] = useState([]);
 
-  console.log(libros);
+  const { libros } = useSelector((store) => store.libros);
+  const editar = (id) => {
+    const traerElLibro = libros.find((t) => t.id === id);
+    console.log(traerElLibro)
+    setModal(true);
+    setEnviarDatosModal(traerElLibro);
+  };
+
   return (
     <div>
       <table className="table text-center mt-3">
@@ -34,6 +43,7 @@ const Listar = () => {
                   value="Actualizar"
                   type="button"
                   className="btn btn-outline-dark"
+                  onClick={() => editar(l.id)}
                 />
                 <input
                   value="Eliminar"
@@ -46,6 +56,7 @@ const Listar = () => {
           ))}
         </tbody>
       </table>
+      {modal === true ? <Editar modal={enviarDatosModal} /> : ""}
     </div>
   );
 };

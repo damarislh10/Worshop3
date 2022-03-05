@@ -6,7 +6,24 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
+
+export const editAsync = (id, contentTodo) => {
+  return async (dispatch) => {
+    updateDoc(doc(db, "libros", id), contentTodo);
+    dispatch(editSyn(contentTodo));
+    dispatch(listLibrosAsync());
+  };
+};
+// edit sync-------
+
+export const editSyn = (contentTodo) => {
+  return {
+    type: typesLibros.edit,
+    payload: contentTodo,
+  };
+};
 
 // Eliminar asyncronico
 
