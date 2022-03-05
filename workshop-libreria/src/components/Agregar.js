@@ -1,15 +1,18 @@
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { FileUpload } from "../helpers/FileUpload";
 import {
   agregarLibroAsync,
   listLibrosAsync,
 } from "../redux/actions/actionLibros";
+import { actionLogout } from "../redux/actions/actionLogin";
 import Listar from "./Listar";
 
 const Agregar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -22,7 +25,11 @@ const Agregar = () => {
       dispatch(agregarLibroAsync(data));
     },
   });
-
+  const handleLogout = () => {
+    console.log('click en logout');
+    dispatch(actionLogout())
+    navigate("/")
+  }
   const handlePictureClick = () => {
     document.querySelector("#fileSelector").click();
   };
@@ -45,6 +52,7 @@ const Agregar = () => {
 
   return (
     <div>
+      <button type="button" className='btn btn-danger' onClick={() => handleLogout()}>Logout</button>
       <div className="container mt-5">
         <hr />
         <div className="row">

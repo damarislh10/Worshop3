@@ -1,4 +1,5 @@
-import { getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { useDispatch } from "react-redux";
 import { google } from "../../firebase/firebaseConfig";
 import { types } from "../types/types";
 
@@ -40,4 +41,26 @@ export const actionLogin = (id, displayName) => {
             displayName
         }
     }
+}
+
+export const actionLogout = () => {
+   return (dispatch) => {
+    const auth = getAuth();
+    signOut(auth)
+    .then(resp => {
+        console.log(resp)
+    })
+    .catch(e => {
+        console.log(e)
+    })
+    dispatch(actionLogoutSync)
+   }
+   
+}
+
+export const actionLogoutSync = () => {
+    return {
+        type: types.logout
+    }
+    
 }

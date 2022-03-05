@@ -5,8 +5,8 @@ export const DashboardRoutes = () => {
     return (
         <>
          <Routes>
-            <Route path="/" element={<Agregar />} />
-            <Route path='*' element={<Navigate to="/"/>}/>
+            <Route path="/agregar" element={<Agregar />} />
+            <Route path='*' element={<Navigate to="/agregar"/>}/>
          </Routes>
         </>
     )
